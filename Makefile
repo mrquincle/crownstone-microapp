@@ -19,6 +19,7 @@ init:
 
 $(TARGET).elf.tmp: src/main.c src/microapp.c src/Arduino.c src/Wire.cpp src/Serial.cpp $(TARGET).c $(SHARED_PATH)/ipc/cs_IpcRamData.c
 	@echo "Compile without firmware header"
+	@$(CC) -CC -E -x c -Iinclude include/microapp_symbols.ld.in | grep -v '^#' > include/microapp_symbols.ld
 	@$(CC) $(FLAGS) $^ -I$(SHARED_PATH) -Iinclude -Linclude -Wl,--defsym=OFFSET=0 -Wl,--defsym=SIZE=0 -Wl,--defsym=CHECKSUM=0 -Wl,--defsym=RESERVE=0 -Tgeneric_gcc_nrf52.ld -o $@
 
 $(TARGET).config: $(TARGET).offset $(TARGET).size $(TARGET).checksum $(TARGET).reserve

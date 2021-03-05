@@ -1,1 +1,4 @@
 build/
+include/microapp_symbols.ld
+private.mk
+tags

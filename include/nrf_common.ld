@@ -17,6 +17,8 @@
  */
 OUTPUT_FORMAT ("elf32-littlearm", "elf32-bigarm", "elf32-littlearm")
 
+INCLUDE "microapp_symbols.ld"
+
 /* Linker script to place sections and symbol values. Should be used together
  * with other linker script that defines memory regions FLASH and RAM.
  * It references following symbols, which must be defined in code:
@@ -56,6 +58,8 @@ SECTIONS
 		LONG(SIZE)
 		LONG(CHECKSUM)
 		LONG(RESERVE)
+		BYTE(__SDK_VERSION_MAJOR)
+		BYTE(__SDK_VERSION_MINOR)
 		. = ALIGN(4);
 	} > FLASH
 
